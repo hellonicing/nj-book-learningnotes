@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // page40
+    // 定义一个store用于存储数据
+    const store = {
+      nextId: 1,
+      cache: {},
+      add: function (fn) {
+        if (!fn.id) {
+          fn.id = this.nextId++;
+          this.cache[fn.id] = fn;
+          return true;
+        } else {
+          return false
+        }
+      }
+    }
+    // 待添加的两个函数
+    function ninja() { }
+    function ninjaaa() { }
+    // 当第一次添加时，会给ninja函数添加一个id属性
+    console.log(store.add(ninja)); // 返回true，表示添加成功
+    // 当第二次添加时，由于ninja函数已经存在id属性了，就不会存入store的cache中
+    console.log(store.add(ninja)); // 返回false，表示添加失败
+    // 首次添加ninjaaa函数
+    store.add(ninjaaa)
+    // 打印store，发现cache中保存了两个函数
+    console.log(store);
+    // 打印ninjia函数，发现存在id属性
+    console.dir(ninja);
+  </script>
+</body>
+
+</html>
