@@ -9,7 +9,37 @@
 </head>
 
 <body>
+  <script>
+    function isPrime(value) {
+      // 首次执行时，先给isPrime函数添加一个 answers对象 属性
+      if (!isPrime.answers) {
+        isPrime.answers = {};
+      }
+      // 当answers中存在该值时，直接返回该值
+      if (isPrime.answers[value] !== undefined) {
+        console.log('直接访问缓存');
+        return isPrime.answers[value]
+      }
+      // 当answers中不存在该值时，继续下面的判断
+      var prime = value !== 0 && value !== 1;
+      // 检查value是否为素数 如果是，则给该数字标记true，否则标记false
+      for (var i = 2; i < value; i++) {
+        if (value % i === 0) {
+          prime = false;
+          break;
+        }
+      }
+      console.log('数据有变化，重新设置');
+      // 最后，将值存入answers，并赋值true或false
+      return isPrime.answers[value] = prime
+    }
+    console.log(isPrime(4)); // false 不是素数  首次访问
+    console.log(isPrime(5)); // true  是素数  首次访问
+    console.log(isPrime(5)); // true  是素数  直接访问缓存
+    console.dir(isPrime);
 
+
+  </script>
 </body>
 
 </html>
